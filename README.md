@@ -16,4 +16,4 @@ npm run start // 启动项目
 npm run build // 打包项目
 ```
 
-**备注：**关于如何利用gulp 4.x构建前端项目，可以参考我写的这篇文章[利用gulp 4.x搭建前端项目](https://darenone.github.io/zongqiang-bookmarks/scaffold/gulp/gulp-1.html)
+**备注**：关于如何利用gulp 4.x构建前端项目，可以参考我写的这篇文章[利用gulp 4.x搭建前端项目](https://darenone.github.io/zongqiang-bookmarks/scaffold/gulp/gulp-1.html)
