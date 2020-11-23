@@ -67,6 +67,7 @@ async function server() {
         // ip: '192.168.1.65', // 默认localhost:8080
         livereload: true, // 自动更新
         port: 8090,
+        host: '0.0.0.0', // 开启局域网内访问
         // middleware: function(connect, opt) {
         //     return [
         //         createProxyMiddleware('/api', {
