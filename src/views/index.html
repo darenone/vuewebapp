@@ -200,16 +200,45 @@
         var navsList = document.getElementById('navsList');
         var startX = 0
         var eleX = 0
+
+        var t1 = 0
+        var w1 = 0
+        var t2 = 0
+        var w2 = 0
+        var disT = 0
+        var disW = 0
         navs.addEventListener('touchstart', function(event) {
             var touch = event.changedTouches[0];
             startX = touch.clientX;
-            eleX = transformCss(navsList, 'translateX')
+            eleX = transformCss(navsList, 'translateX');
+            t1 = new Date().getTime();
+            w1 = eleX;
         })
         navs.addEventListener('touchmove', function(event) {
             var touch = event.changedTouches[0];
             var nowX = touch.clientX;
             var disX = nowX - startX;
-            transformCss(navsList, 'translateX', disX + eleX)
+            var translateX = disX + eleX;
+            if (translateX > 0) {
+                var scale = 1 - translateX / document.documentElement.clientWidth;
+                translateX = translateX * scale;
+            } else if (translateX < document.documentElement.clientWidth - navsList.offsetWidth) {
+                var minX = document.documentElement.clientWidth - navsList.offsetWidth; // 负
+                var scale = 1 -  (minX - translateX) / document.documentElement.clientWidth
+                translateX = minX - (minX - translateX) * scale
+            }
+            transformCss(navsList, 'translateX', translateX);
+
+            t2 = new Date().getTime();
+            w2 = translateX;
+            disT = t2 - t1;
+            disW = w2 - w1;
+        })
+        navs.addEventListener('touchend', function(event) {
+            var touch = event.changedTouches[0]; 
+            var speed = disW / disT;
+            var target = transformCss(navsList, 'translateX') + speed * 100;
+            transformCss(navsList, 'translateX', target);
         })
     }
 </script>
