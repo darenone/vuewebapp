@@ -13,7 +13,7 @@
             width: 50px;
             height: 50px;
             background: deepskyblue;
-            /* transform:translateX(200px) scale(0.5); */
+            transform:translateX(200px) scale(0.5);
         }
     </style>
 </head>
@@ -23,8 +23,6 @@
 <script type="text/javascript" src="../js/lib/util.js"></script>
 <script type="text/javascript">
     var box = document.getElementById('box');
-    transformCss(box, 'translateX', 200); // 写
-    // transformCss(box, 'translateX'); // 读
-    console.log(transformCss(box, 'translateX'))
+    transformCss(box, 'translate', 200);
 </script>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!-- 先告诉浏览器这是一个移动端项目 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, userscalable=no">
-    <title>移动端音乐台</title>
+    <title>web-app</title>
     <style type="text/css">
         /* 取消浏览器默认样式 */
         * {
@@ -165,29 +165,51 @@
     }
     // 导航拖拽
     drag();
-    function drag() {
+    // function drag() {
+    //     var navs = document.getElementById('navs');
+    //     var navsList = document.getElementById('navsList');
+    //     var startX = 0; // 手指的初始位置
+    //     var eleX = 0; // 元素初始位置
+    //     navs.addEventListener('touchstart', function(event) {
+    //         var touch = event.changedTouches[0]; // 获取触摸点列表（一个手指操作就是一个触摸点，两个手指操作就是两个）
+    //         startX = touch.clientX; // 手指初始位置
+    //         eleX = transformCss(navsList, 'translateX') // 元素初始位置
+    //     })
+    //     navs.addEventListener('touchmove', function (event) {
+    //         var touch = event.changedTouches[0]
+    //         var nowX = touch.clientX;
+    //         var disX = nowX - startX; // 手指滑动的距离
+    //         var translateX = eleX + disX; // 动画移动的距离
+    //         // 往右滑动时
+    //         // 往右滑动translateX为正值，主要大于0就会出现白色区域，所以不能让它大于0
+    //         if (translateX > 0) {
+    //             // 往右回弹效果实现
+    //             // 往右移动，随着translateX越来越大，这个比值（translateX / document.documentElement.clientWidth）会越来越大 1减去这个值，得到scale会越来越小
+    //             var scale = 1 - translateX / document.documentElement.clientWidth;
+    //             translateX = translateX * scale; // translateX增加的幅度越来越小
+    //         // 往左滑动时translateX为负值
+    //         // 屏幕的宽度-navsList的宽度=临界点，比如（-10）就是临界点，动画位移如果再往左，比如（-11）就会出现白色区域，所以不能小于-10
+    //         } else if (translateX < document.documentElement.clientWidth - navsList.offsetWidth) {
+    //             translateX = document.documentElement.clientWidth - navsList.offsetWidth
+    //         }
+    //         transformCss(navsList, 'translateX', translateX)
+    //     })
+    // }
+    function drag () {
         var navs = document.getElementById('navs');
         var navsList = document.getElementById('navsList');
-        var startX = 0; // 手指的初始位置
-        var eleX = 0; // 元素初始位置
+        var startX = 0
+        var eleX = 0
         navs.addEventListener('touchstart', function(event) {
-            var touch = event.changedTouches[0]; // 获取触摸点列表（一个手指操作就是一个触摸点，两个手指操作就是两个）
-            startX = touch.clientX; // 手指初始位置
-            eleX = transformCss(navsList, 'translateX') // 元素初始位置
+            var touch = event.changedTouches[0];
+            startX = touch.clientX;
+            eleX = transformCss(navsList, 'translateX')
         })
-        navs.addEventListener('touchmove', function (event) {
-            var touch = event.changedTouches[0]
+        navs.addEventListener('touchmove', function(event) {
+            var touch = event.changedTouches[0];
             var nowX = touch.clientX;
-            var disX = nowX - startX; // 手指滑动的距离
-            var translateX = eleX + disX
-            // 往右滑动时
-            if (translateX > 0) {
-                translateX = 0
-                // 往左滑动时
-            } else if (translateX < document.documentElement.clientWidth - navsList.offsetWidth) { // 屏幕的宽度-navsList的宽度
-                translateX = document.documentElement.clientWidth - navsList.offsetWidth
-            }
-            transformCss(navsList, 'translateX', translateX)
+            var disX = nowX - startX;
+            transformCss(navsList, 'translateX', disX + eleX)
         })
     }
 </script>

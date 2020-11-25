@@ -1,40 +1,43 @@
 (function (w) {
+    /*
+    * 读取或设置元素动画值
+    * @params node 元素
+    * @params name 动画名
+    * @params value 动画值
+    * @return 元素动画值
+    */
     w.transformCss = function (node, name, value) {
         if (!node.transform) {
             node.transform = {};
         }
-        // arguments 传参个数
         if (arguments.length > 2) {
-            // 带value就是写的操作
-            // 写
-            node.transform[name] = value
+            node.transform[name] = value;
             var result = '';
             for (var item in node.transform) {
                 switch (item) {
-                    case 'rotate': 0 // 为0相当于没有旋转
-                    case 'skew': 0
-                    case 'skewX': 0
-                    case 'skewY': 0
-                        result = item + '('+ node.transform[item] +'deg)';
+                    case 'rotate':
+                    case 'skew':
+                    case 'skewX':
+                    case 'skewY':
+                        result += ' ' + item + '('+ node.transform[item] +'deg)';
                         break;
-                    case 'scale': 1 // 缩放比例为1，相当于没有缩放
-                    case 'scaleX': 1
-                    case 'scaleY': 1
-                        result = item + '('+ node.transform[item] +')';
+                    case 'scale':
+                    case 'scaleX':
+                    case 'scaleY':
+                        result += ' ' + item + '('+ node.transform[item] +')';
                         break;
-                    case 'translate': 0
-                    case 'translateX': 0
-                    case 'translateY': 0
-                        result = item + '('+ node.transform[item] +'px)';
+                    case 'translate':
+                    case 'translateX':
+                    case 'translateY':
+                        result += ' ' + item + '('+ node.transform[item] +'px)';
                         break;
                 }
             }
             node.style.transform = result;
         } else {
-            // 不传value就是读的操作
-            // 读
             if (typeof node.transform[name] == 'undefined') {
-                if (name == 'scale' || name == 'skewX' || name == 'skewY') {
+                // 这三个值比较特殊，因为它们的默认值是1
+                if (name == 'scale' || name == 'scaleX' || name == 'scaleY') {
                     value = 1
                 } else {
                     value = 0
